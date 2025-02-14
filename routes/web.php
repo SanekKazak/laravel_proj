@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Work_controller;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/test_bd', [Work_controller::class, 'index']);

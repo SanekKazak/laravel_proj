@@ -14,6 +14,6 @@ class Work_controller extends Controller
     public function index()
     {
         $workers = Worker::all();
-        return view('workers.index', compact('workers'));
+        return view('workers.index', compact('workers') );
     }
 }

@@ -1,5 +1,5 @@
 <div>
-    <h1 >Список постов</h1>
+    <h1 >Список рабочих</h1>
     
         @foreach ($workers as $worker)
             <div>

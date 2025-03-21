@@ -1,22 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-h1 {
-    @apply text-6xl font-semibold text-black ;
-}
-a {
-    @apply text-5xl font-semibold text-black underline mx-4;
-}
-
-.field{
-    @apply border border-gray-500 rounded-lg p-4;
-}
-
-button {
-    @apply border border-gray-500 rounded-lg p-4 ml-9 mt-4;
-}
-select {
-    @apply border border-gray-500 rounded-lg p-4 ;
-}
-

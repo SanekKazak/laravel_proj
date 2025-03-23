@@ -1,12 +1,11 @@
-/** @type {import('tailwindcss').Config} */
-export const content = [
-  "./resources/views/**/*.blade.php",
-  "./resources/css/**/*.css",
-  "./resources/js/**/*.js",
-];
-export const theme = {
-  extend: {},
+module.exports = {
+  content: [
+    "./resources/views/**/*.blade.php", // Файлы Blade
+    "./resources/js/**/*.js",           // JS файлы, если в них есть классы
+    "./resources/css/**/*.css"          // CSS файлы
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
-export const plugins = [];
-
-

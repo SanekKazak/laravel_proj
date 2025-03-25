@@ -5,34 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Worker;
 
-class Work_controller extends Controller
+class Work_Controller extends Controller
 {
     public function index(Request $request)
     {
-        $workers = Worker::all();
+        $query = Worker::query();
+        $allWorkers = Worker::all();
 
-        if($request->input('alphSort')==1){
-            $workers = $workers->sortBy('name');
+        if ($request->input('alphSort')==1) {
+            $query->orderBy('name', 'asc');
         }
-        if($request->input('moneySort')==1){
-            $workers = $workers->sortBy('payment_type');
+        if ($request->input('moneySort')==1) {
+            $query->orderBy('payment_type', 'asc');
         }
-        if($request->input('role_sort') == "manager"){
-            $workers = $workers->where('role_type', "manager");
+        if ($request->input('role_sort')) {
+            $query->where('role_type', $request->input('role_sort'));
         }
-        if($request->input('role_sort') == "admin"){
-            $workers = $workers->where('role_type', "admin");
-        }
-        if($request->input('role_sort') == "employee"){
-            $workers = $workers->where('role_type', "employee");
-        }
-        return view('workers.index', compact('workers') );
+    
+        $workers = $query->paginate(10);
+
+        return view('workers.index', compact('workers', 'allWorkers') );
     }
     public function add()
     {
         return view('workers.add');
     }
-    public function add_INTO(Request $request)
+    public function addInTo(Request $request)
     {
         $validated = $request->validate([
             'email' => [
@@ -56,22 +54,11 @@ class Work_controller extends Controller
             'name' => $request->input('name'),
         ]);
 
-        $workers = Worker::all();
-        return view('workers.index', compact('workers') );
+        return redirect('/list');
     }
     public function autoAdd()
     {
         Worker::factory()->count(10)->create();
         return view('workers.add');
     }
-    public function loadMore(Request $request)
-    {
-        $posts = Post::latest()->paginate(10);
-
-        return response()->json([
-            'posts' => $posts->items(),
-            'next_page_url' => $posts->nextPageUrl()
-        ]);
-    }
-
 }

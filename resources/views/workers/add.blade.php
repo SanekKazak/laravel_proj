@@ -42,9 +42,9 @@
         <button type="submit" class="w-full border border-gray-500 rounded-lg p-4 mt-4 bg-blue-500">
             Добавить
         </button>
-    </form>
-    <a href="http://localhost:8000/auto_test_add"  class="w-full border border-gray-500 rounded-lg p-20 mt-20 bg-blue-500">
+        <a href="http://localhost:8000/auto_test_add"  class="w-full border border-gray-500 rounded-lg bg-blue-500">
             Добавить тестовые значения
-    </a>
+        </a>
+    </form>
 </div>
 @endsection

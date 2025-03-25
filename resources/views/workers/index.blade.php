@@ -3,6 +3,17 @@
 <div class="max-w-4xl mx-auto mt-20 p-6 bg-white shadow-md rounded-lg">
     <h1 class="text-3xl font-bold mb-6 text-center">Список рабочих</h1>
 
+    <div class="bg-white mb-6 p-6 rounded-lg shadow-md">
+        <h3 class="font-semibold mb-4">Статистика по рабочим местам</h3>
+        <ul class="space-y-2">
+            <li>Всего рабочик:{{ $allWorkers->count() }}</li>
+            <li>Менеджеров:{{ $allWorkers->where('role_type', "manager")->count() }}</li>
+            <li>Админов:{{ $allWorkers->where('role_type', "admin")->count() }}</li>
+            <li>Работяг:{{ $allWorkers->where('role_type', "employee")->count() }}</li>
+            <li>Больше всех:{{ $allWorkers->countBy('role_type')->sortDesc()->keys()->first() }}</li>
+        </ul>
+    </div>
+
     <button id="toggleButton" onclick="toggleElement()" 
         class="border border-gray-500 bg-blue-500 font-bold py-2 px-4 rounded-lg hover:bg-blue-600">
         Показать/Скрыть фильтры
@@ -17,6 +28,7 @@
 
     <div id="hiddenElement" class="mt-4 p-4  rounded-lg shadow-md" style="display: none;">
         <form action="/list" method="GET" class="space-y-4">
+            @csrf
             <div class="flex items-center space-x-2">
                 <input type="checkbox" name="alphSort" id="alphSort" value="1" class="w-5 h-5">
                 <label for="alphSort" class="text-lg font-medium">Сортировать по алфавиту</label>
@@ -53,5 +65,8 @@
             <p class="text-gray-800 font-medium">Роль: {{ $worker->role_type }}</p>
         </div>
     @endforeach
+    <div class="mt-6">
+        {{ $workers->appends(request()->query())->links() }}
+    </div>
 </div>
 @endsection

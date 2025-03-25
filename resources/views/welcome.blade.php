@@ -19,9 +19,13 @@
                         class="border border-gray-500 text-gray-600 px-6 py-2 rounded-lg transition duration-300 text-lg font-medium hover:bg-gray-200">
                         Добавить
                     </a>
-                    <a href="http://localhost:8000/uploader" 
+                    <a href="http://localhost:8000/upload" 
                         class="border border-gray-500 text-gray-600 px-6 py-2 rounded-lg transition duration-300 text-lg font-medium hover:bg-gray-200">
                         Файл
+                    </a>
+                    <a href="http://localhost:8000/files" 
+                        class="border border-gray-500 text-gray-600 px-6 py-2 rounded-lg transition duration-300 text-lg font-medium hover:bg-gray-200">
+                        Файлы
                     </a>
                 </div>
             </div>

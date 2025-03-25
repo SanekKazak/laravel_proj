@@ -21,6 +21,7 @@ class WorkerFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'payment_type' => $this->faker->randomElement([10000, 20000, 30000]),
             'role_type' => $this->faker->randomElement(['employee', 'admin', 'manager']),
+            'filename_type' => '0.jpg',
         ];
 
     }

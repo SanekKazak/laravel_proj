@@ -12,7 +12,7 @@ class Worker extends Model
     use HasFactory;
     protected $table = 'workers';
 
-    protected $with = ['paymentType', 'roleType'];
+    protected $with = ['paymentType', 'roleType', 'fileName'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -20,6 +20,7 @@ class Worker extends Model
         'email',
         'payment_type',
         'role_type',
+        'filename_type',
     ];
 
     public function paymentType()
@@ -30,5 +31,10 @@ class Worker extends Model
     public function roleType()
     {
         return $this->belongsTo(Role::class, 'role_type', 'type');
+    }
+
+    public function fileName()
+    {
+        return $this->belongsTo(Achievement::class, 'filename_type', 'filename');
     }
 }

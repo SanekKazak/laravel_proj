@@ -39,10 +39,43 @@
             </select>
         </div>
 
-        <button type="submit" class="w-full border border-gray-500 rounded-lg p-4 mt-4 bg-blue-500">
+        <div>
+            <label for="achievement_path" class="block text-lg font-medium">Выберите медаль:</label>
+            <select id="achievement_path" name="achievement_path" class="w-full border border-gray-500 rounded-lg p-3 text-lg bg-white">
+                @foreach($medals as $medal)
+                    <option value="{{ $medal['path'] }}" data-img="{{ Storage::url($medal['path']) }}">
+                        {{ pathinfo($medal['filename'], PATHINFO_FILENAME) }} место
+                    </option>
+                @endforeach
+            </select>
+            <img id="medal_preview" src="" alt="Изображение медали" width="250" class="mt-2 hidden object-cover border border-gray-400 rounded-lg shadow-md">
+        </div>
+
+        <script>
+            const select = document.getElementById("achievement_path");
+            const img = document.getElementById("medal_preview");
+
+            select.addEventListener("change", function() {
+                const selectedOption = select.options[select.selectedIndex];
+                const imgSrc = selectedOption.getAttribute("data-img");
+
+                if (imgSrc) {
+                    img.src = imgSrc;
+                    img.classList.remove("hidden");
+                } else {
+                    img.classList.add("hidden");
+                }
+            });
+
+            select.dispatchEvent(new Event('change'));
+        </script>
+
+        <button type="submit" class="w-full text-white font-bold py-3 mt-4 rounded-lg bg-blue-500 hover:bg-blue-600 shadow-md">
             Добавить
         </button>
-        <a href="http://localhost:8000/auto_test_add"  class="w-full border border-gray-500 rounded-lg bg-blue-500">
+
+        <a href="http://localhost:8000/auto_test_add"
+        class="block w-full text-center text-white font-bold py-3 mt-2 rounded-lg bg-green-500 hover:bg-green-600 shadow-md">
             Добавить тестовые значения
         </a>
     </form>

@@ -59,13 +59,6 @@ return [
             'throw' => false,
             'report' => false,
         ],
-        'test' => [
-            'driver' => 'local',
-            'root' => storage_path('app/test'),
-            'url' => env('APP_URL') . '/storage/test',
-            'visibility' => 'public',
-        ],
-
     ],
 
     /*

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Worker;
+use App\Models\Achievement;
 
 class Work_Controller extends Controller
 {
@@ -28,7 +29,8 @@ class Work_Controller extends Controller
     }
     public function add()
     {
-        return view('workers.add');
+        $medals = Achievement::all();
+        return view('workers.add', compact('medals'));
     }
     public function addInTo(Request $request)
     {
@@ -58,7 +60,8 @@ class Work_Controller extends Controller
     }
     public function autoAdd()
     {
+        $medals = Achievement::all();
         Worker::factory()->count(10)->create();
-        return view('workers.add');
+        return view('workers.add', compact('medals'));
     }
 }

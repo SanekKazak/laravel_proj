@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->unsignedBigInteger('type')->primary();
+        Schema::create('achievements', function (Blueprint $table) {
+            $table->string('filename')->primary();
+            $table->string('path');
         });
     }
 

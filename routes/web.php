@@ -11,3 +11,5 @@ Route::post('/add_page', [Work_Controller::class, 'addInTo']);
 Route::get('/upload', [File_Controller::class, 'uploader']);
 Route::post('/upload', [File_Controller::class, 'writeFile']);
 Route::get('/files', [File_Controller::class, 'storage']);
+Route::post('/files', [File_Controller::class, 'delete']);
+Route::get('/medals', [File_Controller::class, 'achievements']);

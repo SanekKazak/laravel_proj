@@ -63,6 +63,11 @@
             <p class="text-gray-600">{{ $worker->email }}</p>
             <p class="text-gray-800 font-medium">Оплата: {{ $worker->payment_type }}</p>
             <p class="text-gray-800 font-medium">Роль: {{ $worker->role_type }}</p>
+            <form action="/medals" method="GET">
+                @csrf
+                <input type="hidden" name="email" value="{{ $worker->email}}">
+                <button type="submit" class="border border-gray-500 font-bold rounded-lg hover:bg-blue-600">Награды</button>
+            </form>
         </div>
     @endforeach
     <div class="mt-6">

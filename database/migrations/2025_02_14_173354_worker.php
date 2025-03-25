@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_type');
             $table->string('role_type');
             $table->string('name');
+            $table->string('filename_type');
             $table->foreign('payment_type')->references('type')->on('payments')->onDelete('cascade');
             $table->foreign('role_type')->references('type')->on('roles')->onDelete('cascade');
+            $table->foreign('filename_type')->references('filename')->on('achievements')->onDelete('cascade');
         });
     }
 
@@ -26,6 +28,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('workers', function (Blueprint $table) {
+            Schema::dropIfExists('workers');
+        });
     }
 };

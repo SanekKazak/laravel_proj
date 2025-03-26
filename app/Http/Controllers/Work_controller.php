@@ -11,6 +11,7 @@ class Work_Controller extends Controller
     public function index(Request $request)
     {
         $query = Worker::query();
+        $medals = Achievement::all();
         $allWorkers = Worker::all();
 
         if ($request->input('alphSort')==1) {
@@ -25,7 +26,7 @@ class Work_Controller extends Controller
     
         $workers = $query->paginate(10);
 
-        return view('workers.index', compact('workers', 'allWorkers') );
+        return view('workers.index', compact('workers', 'allWorkers', 'medals') );
     }
     public function add()
     {
@@ -54,6 +55,7 @@ class Work_Controller extends Controller
             'payment_type' => $request->input('payment_type'),
             'role_type' => $request->input('role_type'),
             'name' => $request->input('name'),
+            'filename_type' => $request->input('filename_type'),
         ]);
 
         return redirect('/list');

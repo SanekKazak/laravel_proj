@@ -11,7 +11,9 @@ class Worker extends Model
 {
     use HasFactory;
     protected $table = 'workers';
-
+    protected $primaryKey = 'email';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $with = ['paymentType', 'roleType', 'fileName'];
     public $timestamps = false;
 

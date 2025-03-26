@@ -58,15 +58,24 @@
     </div>
     <div class="mt-8 space-y-6" id="worker-container">
     @foreach ($workers as $worker)
+        @php
+            $medal = $medals->where('filename', $worker->filename_type)->first();
+        @endphp
+
         <div class="p-4 bg-white shadow-md rounded-lg border border-gray-200">
             <h2 class="text-2xl font-semibold">{{ $worker->name }}</h2>
             <p class="text-gray-600">{{ $worker->email }}</p>
             <p class="text-gray-800 font-medium">Оплата: {{ $worker->payment_type }}</p>
             <p class="text-gray-800 font-medium">Роль: {{ $worker->role_type }}</p>
-            <form action="/medals" method="GET">
-                @csrf
-                <input type="hidden" name="email" value="{{ $worker->email}}">
-                <button type="submit" class="border border-gray-500 font-bold rounded-lg hover:bg-blue-600">Награды</button>
+
+            <img src="{{ Storage::url($medal->path) }}" alt="Изображение медали" width="100" class="rounded-lg mb-4">
+
+            <form action="/medals" method="POST" class="w-full">
+                    @csrf
+                    <input type="hidden" name="email" value="{{ $worker->email }}">
+                    <button type="submit" class="w-full bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300">
+                        Награды
+                    </button>
             </form>
         </div>
     @endforeach
@@ -74,4 +83,4 @@
         {{ $workers->appends(request()->query())->links() }}
     </div>
 </div>
-@endsection
+@endsection     

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Achievement;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -69,6 +70,19 @@ class File_Controller extends Controller
         return view('file.file');
     }
     public function achievements(Request $request){
-
+        $medals = Achievement::all();
+        $workers = Worker::all();
+        $currentWorker = $workers->firstWhere('email', $request->input('email'));
+        $currentMedal =  $medals->where('filename', $currentWorker->filename_type)->first();
+        $path = $currentMedal->path;
+        return view('file.changer', compact('medals', 'path', 'currentWorker'));
+    }
+    public function achievementsChange(Request $request){
+        $worker = Worker::where('email', $request->input('email'))->first();
+        if ($worker) {
+            $worker->filename_type = $request->input('filename_type');
+            $worker->save();
+        }
+        return redirect('/list');
     }
 }

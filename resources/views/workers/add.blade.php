@@ -40,19 +40,20 @@
         </div>
 
         <div>
-            <label for="achievement_path" class="block text-lg font-medium">Выберите медаль:</label>
-            <select id="achievement_path" name="achievement_path" class="w-full border border-gray-500 rounded-lg p-3 text-lg bg-white">
+            <label for="filename_type" class="block text-lg font-medium">Выберите медаль:</label>
+            <select id="filename_type" name="filename_type" class="w-full border border-gray-500 rounded-lg p-3 text-lg bg-white">
                 @foreach($medals as $medal)
-                    <option value="{{ $medal['path'] }}" data-img="{{ Storage::url($medal['path']) }}">
+                    <option value="{{ $medal['filename'] }}" data-img="{{ Storage::url($medal['path']) }}">
                         {{ pathinfo($medal['filename'], PATHINFO_FILENAME) }} место
                     </option>
                 @endforeach
             </select>
-            <img id="medal_preview" src="" alt="Изображение медали" width="250" class="mt-2 hidden object-cover border border-gray-400 rounded-lg shadow-md">
+            <img id="medal_preview" src="" alt="Изображение медали" width="250" height="250" 
+                class="mt-2 hidden object-cover border border-gray-400 rounded-lg shadow-md">
         </div>
 
         <script>
-            const select = document.getElementById("achievement_path");
+            const select = document.getElementById("filename_type");
             const img = document.getElementById("medal_preview");
 
             select.addEventListener("change", function() {
@@ -69,6 +70,7 @@
 
             select.dispatchEvent(new Event('change'));
         </script>
+
 
         <button type="submit" class="w-full text-white font-bold py-3 mt-4 rounded-lg bg-blue-500 hover:bg-blue-600 shadow-md">
             Добавить
